@@ -9,7 +9,7 @@
     	}
 	
 	function waitAsync(timer) {
-		if (Number.isInteger(timer)) {
+		if (!Number.isInteger(timer)) {
 			throw "Argument #1 is not Integer!";
 		}
 		
